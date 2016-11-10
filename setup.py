@@ -13,13 +13,13 @@ def read(fname):
 
 setup(
     name='pytest-bugzilla-notifier',
-    version='0.1.0',
+    version='0.1.1',
     author='Chris Hartjes',
     author_email='chartjes@mozilla.com',
     maintainer='Chris Hartjes',
     maintainer_email='chartjes@mozilla.com',
     license='Mozilla Public License 2.0',
-    url='https://github.com/chartjes/pytest-bugzilla-notifier',
+    url='https://github.com/mozilla-services/pytest-bugzilla-notifier',
     packages=['pytest_bugzilla_notifier'],
     package_dir={'pytest_bugzilla_notifier': 'pytest_bugzilla_notifier'},
     description='A plugin that allows you to post test runs to BugZilla tickets',

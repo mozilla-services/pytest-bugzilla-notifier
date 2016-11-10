@@ -39,7 +39,8 @@ Issues
 
 If you encounter any problems, please `file an issue`_ along with a detailed description.
 
-.. _`file an issue`: https://github.com/chartjes/pytest-bugzilla-notifier/issues
+.. _`Mozilla Public License 2.0`: http://mozilla.org/MPL/2.0/
+.. _`file an issue`: https://github.com/mozilla-services/pytest-bugzilla-notifier/issues
 .. _`pytest`: https://github.com/pytest-dev/pytest
 .. _`tox`: https://tox.readthedocs.io/en/latest/
 .. _`pip`: https://pypi.python.org/pypi/pip/
