@@ -20,7 +20,16 @@ account. First, you need to copy bugzilla.ini-dist to bugzilla.ini and add in
 the username and password you will be using to access Bugzilla. Then you can
 use the plugin by running the following::
 
-    $ pytest --env=development --bug=1154581 --config=./bugzilla.ini --bugzilla-url=https://bugzilla-dev.allizom.org tests/test_bugzilla_notifier.py
+    $ pytest --bug=<bug ID> --config=./bugzilla.ini --bugzilla-url=<server> /path/to/tests
+
+<bug ID>
+The ID that Bugzilla assigned to the bug you wish to have the test
+results sent to.
+
+<server>
+The full URL to the Bugzilla instance you wish to send test results to
+(eg https://bugzilla.mozilla.com)
+
 
 Contributing
 ------------

@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name='pytest-bugzilla-notifier',
-    version='0.1.1',
+    version='0.1.2',
     author='Chris Hartjes',
     author_email='chartjes@mozilla.com',
     maintainer='Chris Hartjes',
@@ -24,7 +24,7 @@ setup(
     package_dir={'pytest_bugzilla_notifier': 'pytest_bugzilla_notifier'},
     description='A plugin that allows you to post test runs to BugZilla tickets',
     long_description=read('README.rst'),
-    install_requires=['pytest>=2.9.2', 'requests', 'configparser'],
+    install_requires=['pytest>=2.9.2', 'requests', 'ConfigObj'],
     include_package_data=True,
     classifiers=[
         'Development Status :: 4 - Beta',
