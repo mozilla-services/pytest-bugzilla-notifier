@@ -27,17 +27,16 @@ def pytest_addoption(parser):
 
 def pytest_configure(config):
     if config.option.dest_bug and config.option.dest_bugzilla_url and config.option.dest_config:
-        #try:
-        co = ConfigObj(config.getoption('dest_config'))
-        api_details = {
-            'username': co['username'],
-            'password': co['password'],
-            'bug': config.getoption('dest_bug'),
-            'bugzilla_host': config.getoption('dest_bugzilla_url'),
-        }
-        #except AttributeError:
-        #     print("Could not find Bugzilla API credentials in bugzilla.ini")
-        #    exit(1)
+        try:
+            co = ConfigObj(config.getoption('dest_config'))
+            api_details = {
+                'bugzilla_api_key': co['bugzilla_api_key'],
+                'bug': config.getoption('dest_bug'),
+                'bugzilla_host': config.getoption('dest_bugzilla_url'),
+            }
+        except AttributeError:
+            print("Could not find Bugzilla API credentials in bugzilla.ini")
+            exit(1)
 
         client = BugzillaRESTClient(api_details)
         config._bugzillaPlugin = BugzillaPlugin(

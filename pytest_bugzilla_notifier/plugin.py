@@ -8,8 +8,7 @@ class BugzillaPlugin(object):
         self.bug = api_details['bug']
         self.bugzilla_host = api_details['bugzilla_host']
         self.results = list()
-        self.username = api_details['username']
-        self.password = api_details['password']
+        self.bugzilla_api_key = api_details['bugzilla_api_key']
 
     @pytest.hookimpl(tryfirst=True, hookwrapper=True)
     def pytest_runtest_makereport(self, item, call):

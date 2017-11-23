@@ -7,6 +7,7 @@ BUGZILLA_HOST = 'http://localhost'
 BUGZILLA_BUG = 12345
 BUGZILLA_TOKEN = 'testtoken'
 BUGZILLA_COMMENT_ID = 13
+BUGZILLA_API_KEY = 'bugzillaapikey'
 
 PYTEST_FILE = """
     def test_func():
@@ -33,6 +34,7 @@ def test_pytest_configure(rest_client):
         'component': 'Test Component',
         'bug': BUGZILLA_BUG,
         'bugzilla_host': BUGZILLA_HOST,
+        'bugzilla_api_key': BUGZILLA_API_KEY,
     }
     with pytest.raises(AttributeError):
         bz_plugin = BugzillaPlugin(rest_client, api_details)
@@ -48,6 +50,7 @@ def test_post_results(rest_client):
         'component': 'Test Component',
         'bug': BUGZILLA_BUG,
         'bugzilla_host': BUGZILLA_HOST,
+        'bugzilla_api_key': BUGZILLA_API_KEY,
     }
     test_results = (
         'test_one -> passed',

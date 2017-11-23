@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name='pytest-bugzilla-notifier',
-    version='0.1.2',
+    version='1.0.0',
     author='Chris Hartjes',
     author_email='chartjes@mozilla.com',
     maintainer='Chris Hartjes',
