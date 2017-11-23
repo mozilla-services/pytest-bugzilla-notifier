@@ -17,7 +17,7 @@ Usage
 
 To use this plugin you need to have a username and password for a Bugzilla
 account. First, you need to copy bugzilla.ini-dist to bugzilla.ini and add in
-the username and password you will be using to access Bugzilla. Then you can
+the BugZilla API key you will be using to access Bugzilla. Then you can
 use the plugin by running the following::
 
     $ pytest --bug=<bug ID> --config=./bugzilla.ini --bugzilla-url=<server> /path/to/tests
