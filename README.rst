@@ -45,7 +45,7 @@ To create a new ticket in BugZilla, you need to import the library using::
 
     from pytest_bugzilla_notifier.bugzilla_rest_client import BugzillaRESTClient
 
- and then you can create bugs using code similar to this::
+and then you can create bugs using code similar to this::
 
     api_details = {
         'bugzilla_host': '<bugzilla host you are using>',
@@ -60,7 +60,7 @@ To create a new ticket in BugZilla, you need to import the library using::
     }
     bug_id = rest_client.bug_create(bug_data)
 
-If everything worked as expected, `bug_id`_ will contain the ID BugZilla has assigned to your ticket.
+If everything worked as expected, ``bug_id`` will contain the ID BugZilla has assigned to your ticket.
 
 Contributing
 ------------
