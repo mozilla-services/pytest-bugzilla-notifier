@@ -28,13 +28,8 @@ def pytest_test_items(testdir):
 
 def test_pytest_configure(rest_client):
     api_details = {
-        'username': 'test',
-        'password': 'test',
-        'product': 'Test Product',
-        'component': 'Test Component',
-        'bug': BUGZILLA_BUG,
         'bugzilla_host': BUGZILLA_HOST,
-        'bugzilla_api_key': BUGZILLA_API_KEY,
+        'bugzilla_api_key': BUGZILLA_API_KEY
     }
     with pytest.raises(AttributeError):
         bz_plugin = BugzillaPlugin(rest_client, api_details)
@@ -42,13 +37,8 @@ def test_pytest_configure(rest_client):
 
 
 def test_post_results(rest_client):
-    rest_client.bug_update.return_value = 12345
+    rest_client.bug_update.return_value = BUGZILLA_BUG
     api_details = {
-        'username': 'test',
-        'password': 'test',
-        'product': 'Test Product',
-        'component': 'Test Component',
-        'bug': BUGZILLA_BUG,
         'bugzilla_host': BUGZILLA_HOST,
         'bugzilla_api_key': BUGZILLA_API_KEY,
     }
@@ -58,5 +48,33 @@ def test_post_results(rest_client):
         'test_three -> skipped'
     )
     bz_plugin = BugzillaPlugin(rest_client, api_details)
-    result = bz_plugin.post_results(test_results)
+    result = bz_plugin.post_results(test_results, BUGZILLA_BUG)
     assert result == 12345
+
+def test_create_new_bug(rest_client):
+    rest_client.bug_create.return_value = 12345
+    api_details = {
+        'bugzilla_host': BUGZILLA_HOST,
+        'bugzilla_api_key': BUGZILLA_API_KEY,
+    }
+    bug_data = {
+        'product': 'QA test',
+        'component': 'TestComponent',
+        'summary': 'This is a summary of the bug',
+        'version': ''
+    }
+    bz_plugin = BugzillaPlugin(rest_client, api_details)
+    result = bz_plugin.post_bug(bug_data)
+    assert result == 12345
+
+
+def test_missing_default_create_bug_fields_detected(rest_client):
+    msg = "Missing a default field (product, component, summary, version)"
+    rest_client.bug_create.return_value = msg
+    api_details = {
+        'bugzilla_host': BUGZILLA_HOST,
+        'bugzilla_api_key': BUGZILLA_API_KEY,
+    }
+    bz_plugin = BugzillaPlugin(rest_client, api_details)
+    result = bz_plugin.post_bug({'foo': 1, 'bar': 2, 'product': 'test'})
+    assert result == msg

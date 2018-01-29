@@ -5,7 +5,6 @@ class BugzillaPlugin(object):
     def __init__(self, client, api_details):
         self.client = client
         self.api_details = api_details
-        self.bug = api_details['bug']
         self.bugzilla_host = api_details['bugzilla_host']
         self.results = list()
         self.bugzilla_api_key = api_details['bugzilla_api_key']
@@ -32,5 +31,8 @@ class BugzillaPlugin(object):
             test_results += "{}\n".format(result)
         return self.post_results(test_results)
 
-    def post_results(self, test_results):
-        return self.client.bug_update(test_results, self.bug)
+    def post_results(self, test_results, bug_id):
+        return self.client.bug_update(test_results, bug_id)
+
+    def post_bug(self, bug_data):
+        return self.client.bug_create(bug_data)

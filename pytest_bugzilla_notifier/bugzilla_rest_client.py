@@ -21,7 +21,6 @@ class BugzillaRESTClient():
 
     def __init__(self, api_details):
         self.bugzilla_api_key = api_details['bugzilla_api_key']
-        self.bug = api_details['bug']
         self.bugzilla_host = api_details['bugzilla_host']
 
     def _get_json_update(self, comment, bug_id):
@@ -51,3 +50,31 @@ class BugzillaRESTClient():
         err_msg = "\nUnable to post results to ticket {0}.".format(bug_id)
         err_msg += " Please check that the bug number is correct"
         sys.exit(err_msg)
+
+    def bug_create(self, bug_data):
+        # There are some fields that are mandatory
+        required_fields = {'product', 'component', 'summary', 'version'}
+        omitted = required_fields - set(bug_data.keys())
+
+        if omitted:
+            return "Missing a default field (product, component, summary, version)"
+
+        url = '{0}/rest/bug'.format(self.bugzilla_host)
+        data = bug_data
+        data['Bugzilla_api_key'] = self.bugzilla_api_key
+        req = requests.post(url, data=json.dumps(data), headers=HEADERS)
+        response = req.json()
+
+        if 'id' in response:
+            return response['id']
+
+        if 'error' in response:
+            return "Error {0}".format(response['error'])
+
+        return "An unexpected error occurred"
+
+    def bug_read(self, bug_id):
+        url = '{0}/rest/bug/{1}'.format(self.bugzilla_host, bug_id)
+        bug_data = {'Bugzilla_api_key': self.bugzilla_api_key}
+        req = requests.get(url, data=bug_data, headers=HEADERS)
+        return req.json()
