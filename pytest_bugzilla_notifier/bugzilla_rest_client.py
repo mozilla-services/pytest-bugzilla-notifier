@@ -78,3 +78,9 @@ class BugzillaRESTClient():
         bug_data = {'Bugzilla_api_key': self.bugzilla_api_key}
         req = requests.get(url, data=bug_data, headers=HEADERS)
         return req.json()
+
+    def bug_search(self, search_details):
+        url = '{0}/rest/bug'.format(self.bugzilla_host)
+        req = requests.get(url, params=search_details, headers=HEADERS)
+        return req.json()
+

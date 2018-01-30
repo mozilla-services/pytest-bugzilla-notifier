@@ -36,3 +36,9 @@ class BugzillaPlugin(object):
 
     def post_bug(self, bug_data):
         return self.client.bug_create(bug_data)
+
+    def read_bug(self, bug_id):
+        return self.client.bug_read(bug_id)
+
+    def search_for_bug(self, search_details):
+        return self.client.bug_search(search_details)

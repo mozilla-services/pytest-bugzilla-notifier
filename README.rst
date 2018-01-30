@@ -3,8 +3,10 @@ pytest-bugzilla-notifier
 
 This plugin currently has the following functionality:
 
-* posts the results of test runs to be added to existing BugZilla tickets
+* posts the results of test runs to be added to existing Bugzilla tickets
 * create new tickets as part of a pytest test
+* read bugs given a bug ID
+* search for bugs given a search
 
 
 
@@ -41,7 +43,7 @@ The full URL to the Bugzilla instance you wish to send test results to
 Creating new tickets
 --------------------
 
-To create a new ticket in BugZilla, you need to import the library using::
+To create a new ticket in Bugzilla, you need to import the library using::
 
     from pytest_bugzilla_notifier.bugzilla_rest_client import BugzillaRESTClient
 
@@ -61,6 +63,41 @@ and then you can create bugs using code similar to this::
     bug_id = rest_client.bug_create(bug_data)
 
 If everything worked as expected, ``bug_id`` will contain the ID BugZilla has assigned to your ticket.
+
+Reading Bug Details
+-------------------
+
+If you know the ID for a bug, you can read in the details::
+
+    api_details = {
+        'bugzilla_host': '<bugzilla host you are using>',
+        'bugzilla_api_key': '<bugzilla API key>'
+    }
+    rest_client = BugzillaRESTClient(api_details)
+    bug_id = <bug ID>
+    response = rest_client.bug_read(bug_id)
+
+
+
+Searching For Bugs
+------------------
+
+You can follow the outlines for `search parameters`_ and then submit your search request::
+
+    api_details = {
+        'bugzilla_host': '<bugzilla host you are using>',
+        'bugzilla_api_key': '<bugzilla API key>'
+    }
+    rest_client = BugzillaRESTClient(api_details)
+    search_details = {
+        'product': 'Firefox',
+        'component': 'Developer Tools',
+        'summary': 'Test Bug',
+    }
+    bug_id = rest_client.bug_search(search_details)
+
+
+
 
 Contributing
 ------------
@@ -85,3 +122,4 @@ If you encounter any problems, please `file an issue`_ along with a detailed des
 .. _`tox`: https://tox.readthedocs.io/en/latest/
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`PyPI`: https://pypi.python.org/pypi
+.. _`search parameters`: http://bugzilla.readthedocs.io/en/latest/api/core/v1/bug.html#search-bugs
