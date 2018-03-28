@@ -83,4 +83,3 @@ class BugzillaRESTClient():
         url = '{0}/rest/bug'.format(self.bugzilla_host)
         req = requests.get(url, params=search_details, headers=HEADERS)
         return req.json()
-
