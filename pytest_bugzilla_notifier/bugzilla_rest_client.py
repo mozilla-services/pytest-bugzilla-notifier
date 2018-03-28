@@ -83,3 +83,13 @@ class BugzillaRESTClient():
         url = '{0}/rest/bug'.format(self.bugzilla_host)
         req = requests.get(url, params=search_details, headers=HEADERS)
         return req.json()
+
+    def bug_close(self, bug_id):
+        url = '{0}/rest/bug/{1}'.format(self.bugzilla_host, bug_id)
+        data = {
+            'ids': [bug_id],
+            'is_open': false,
+            'Bugzilla_api_key': self.bugzilla_api_key
+        }
+        req = requests.post(url, data=json.dumps(data), headers=HEADERS)
+        return req.json()

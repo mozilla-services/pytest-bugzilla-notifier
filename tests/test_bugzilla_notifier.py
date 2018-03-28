@@ -92,3 +92,14 @@ def test_read_bug(rest_client, api_details):
     bz_plugin = BugzillaPlugin(rest_client, api_details)
     result = bz_plugin.read_bug(BUGZILLA_BUG)
     assert result['bugs'][0]['id'] == BUGZILLA_BUG
+
+
+def test_close_bug(rest_client, api_details):
+    rest_client.bug_close.return_value = {
+        'bugs': [
+            {'id': BUGZILLA_BUG}
+        ]
+    }
+    bz_plugin = BugzillaPlugin(rest_client, api_details)
+    result = bz_plugin.close_bug(BUGZILLA_BUG)
+    assert result['bugs'][0]['id'] == BUGZILLA_BUG

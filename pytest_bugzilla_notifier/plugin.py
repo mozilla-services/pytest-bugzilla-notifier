@@ -42,3 +42,6 @@ class BugzillaPlugin(object):
 
     def search_for_bug(self, search_details):
         return self.client.bug_search(search_details)
+
+    def close_bug(self, bug_id):
+        return self.client.bug_close(bug_id)
