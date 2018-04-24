@@ -103,3 +103,36 @@ def test_close_bug(rest_client, api_details):
     bz_plugin = BugzillaPlugin(rest_client, api_details)
     result = bz_plugin.close_bug(BUGZILLA_BUG)
     assert result['bugs'][0]['id'] == BUGZILLA_BUG
+
+
+def test_get_attachments(rest_client, api_details):
+    rest_client.get_attachments.return_value = {
+        "bugs": {
+          "1345": [
+             {"attachment"},
+             {"attachment"}
+          ],
+          "9874": [
+             {"attachment"},
+             {"attachment"}
+          ],
+        }
+    }
+    bz_plugin = BugzillaPlugin(rest_client, api_details)
+    result = bz_plugin.get_attachments(BUGZILLA_BUG)
+    assert "bugs" in result
+    assert len(result["bugs"]) == 2
+
+
+def test_get_attachment(rest_client, api_details):
+    rest_client.get_attachment.return_value = {
+        "attachments": {
+            "234": {"attachment"},
+            "123": {"attachment"},
+        }
+    }
+    bz_plugin = BugzillaPlugin(rest_client, api_details)
+    result = bz_plugin.get_attachment(123)
+    assert "attachments" in result
+    assert len(result["attachments"]) == 2
+
