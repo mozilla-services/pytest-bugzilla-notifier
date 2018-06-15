@@ -51,7 +51,7 @@ class BugzillaRESTClient():
         err_msg += " Please check that the bug number is correct"
         sys.exit(err_msg)
 
-    def bug_create(self, bug_data: dict):
+    def bug_create(self, bug_data):
         # There are some fields that are mandatory
         required_fields = {'product', 'component', 'summary', 'version'}
         omitted = required_fields - set(bug_data.keys())
@@ -73,7 +73,7 @@ class BugzillaRESTClient():
 
         return "An unexpected error occurred"
 
-    def bug_read(self, bug_id: int):
+    def bug_read(self, bug_id):
         url = '{0}/rest/bug/{1}'.format(self.bugzilla_host, bug_id)
         bug_data = {'Bugzilla_api_key': self.bugzilla_api_key}
         req = requests.get(url, data=bug_data, headers=HEADERS)
@@ -84,7 +84,7 @@ class BugzillaRESTClient():
         req = requests.get(url, params=search_details, headers=HEADERS)
         return req.json()
 
-    def bug_close(self, bug_id: int):
+    def bug_close(self, bug_id):
         url = '{0}/rest/bug/{1}'.format(self.bugzilla_host, bug_id)
         data = {
             'ids': [bug_id],
@@ -95,12 +95,12 @@ class BugzillaRESTClient():
         req = requests.put(url, data=json.dumps(data), headers=HEADERS)
         return req.json()
 
-    def get_attachments(self, bug_id: int):
+    def get_attachments(self, bug_id):
         url = '{0}/rest/bug/{1}/attachment'.format(self.bugzilla_host, bug_id)
         req = requests.get(url, headers=HEADERS)
         return req.json()
 
-    def get_attachment(self, attachment_id: int):
+    def get_attachment(self, attachment_id):
         url = '{0}/rest/bug/attachment/{1}'.format(self.bugzilla_host, attachment_id)
         req = requests.get(url, headers=HEADERS)
         return req.json()
