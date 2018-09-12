@@ -108,14 +108,14 @@ def test_close_bug(rest_client, api_details):
 def test_get_attachments(rest_client, api_details):
     rest_client.get_attachments.return_value = {
         "bugs": {
-          "1345": [
-             {"attachment"},
-             {"attachment"}
-          ],
-          "9874": [
-             {"attachment"},
-             {"attachment"}
-          ],
+            "1345": [
+                {"attachment"},
+                {"attachment"}
+            ],
+            "9874": [
+                {"attachment"},
+                {"attachment"}
+            ],
         }
     }
     bz_plugin = BugzillaPlugin(rest_client, api_details)
@@ -135,4 +135,3 @@ def test_get_attachment(rest_client, api_details):
     result = bz_plugin.get_attachment(123)
     assert "attachments" in result
     assert len(result["attachments"]) == 2
-

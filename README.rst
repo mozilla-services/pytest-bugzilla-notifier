@@ -1,6 +1,23 @@
 pytest-bugzilla-notifier
 ===================================
 
+.. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg
+   :target: https://github.com/mozilla-services/pytest-bugzilla-notifier/blob/master/LICENSE.txt
+   :alt: License
+.. image:: https://img.shields.io/pypi/v/pytest-bugzilla-notifier.svg
+   :target: https://pypi.org/project/pytest-bugzilla-notifier/
+   :alt: PyPI
+.. image:: https://img.shields.io/travis/mozilla-services/pytest-bugzilla-notifier.svg
+   :target: https://travis-ci.org/mozilla-services/pytest-bugzilla-notifier
+   :alt: Travis
+.. image:: https://img.shields.io/github/issues-raw/mozilla-services/pytest-bugzilla-notifier.svg
+   :target: https://github.com/mozilla-services/pytest-bugzilla-notifier/issues
+   :alt: Issues
+.. image:: https://pyup.io/repos/github/mozilla-services/pytest-bugzilla-notifier/shield.svg
+   :target: https://pyup.io/repos/github/mozilla-services/pytest-bugzilla-notifier/
+   :alt: Updates
+
+
 This plugin currently has the following functionality:
 
 * posts the results of test runs to be added to existing Bugzilla tickets
